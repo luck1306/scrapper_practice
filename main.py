@@ -3,8 +3,9 @@ import requests
 
 from bs4 import BeautifulSoup
 
+# pylint: disable=C0103
 url = "https://www.albamon.com/jobs/area?areas=G000"
-response = requests.get(url)
+response = requests.get(url, timeout=5000)
 
 soup = BeautifulSoup(response.content, "html.parser")
 jobs = soup.find("ul", class_="SimpleRecruitList_simple-recruit-list__ul__5KKhf").find_all("li")
@@ -22,4 +23,6 @@ for e in jobs:
         "pay_type": pay_type.text,
         "url": url["href"]
     })
-print(jobs_list)
+
+# pylint: disable=C0304
+print(jobs_list, end="\n")
