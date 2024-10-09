@@ -2,8 +2,9 @@
 from playwright.sync_api import sync_playwright
 """time"""
 import time
-# import csv
+import csv
 from bs4 import BeautifulSoup
+import os
 
 p = sync_playwright().start()
 browser = p.chromium.launch()
@@ -28,14 +29,21 @@ articles = soup.find_all("tr", {
     "class": "ub-content us-post"
     })
 
+csv_file = open("gundam_gall.csv", "w", encoding="UTF-8")
+writer = csv.writer(csv_file)
+if os.stat("./gundam_gall.csv").st_size == 0:
+    writer.writerow(["제목", "작성자", "날짜", "링크"])
+
 for e in articles:
    title: str = e.find("a").text
    name: str = e.find("td", class_="gall_writer")["data-nick"]
    date: str = e.find("td", class_="gall_date")["title"]
    url: str = f"https://gall.dcinside.com{e.find('a')['href']}"
-   print(title.replace("\n", ""), end=" - ")
-   print(name, end=" - ")
-   print(date, end=" - ")
-   print(url)
+   writer.writerow([title, name, date, url])
+#    print(title.replace("\n", ""), end=" - ")
+#    print(name, end=" - ")
+#    print(date, end=" - ")
+#    print(url)
 
 p.stop()
+csv_file.close()
