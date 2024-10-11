@@ -21,6 +21,7 @@ test-output.*
 /tests/keys/localhost.crt
 /tests/keys/localhost.key
 *.csv
+__pycache__/*
 
 # Windows
 Thumbs.db
