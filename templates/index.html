@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        />
+        <title>Scrapper</title>
+    </head>
+    <body>
+        <main class="container">
+            <form action="/find" , method="get">
+                <label for="keyword">Keyword</label>
+                <input
+                    type="text"
+                    name="keyword"
+                    placeholder="검색어 입력..."
+                    id="keyword"
+                />
+                <label for="service_type">Search Type</label>
+                <select name="service_type" id="service_type">
+                    <option value="namu">나무위키</option>
+                    <option value="dc">디시인사이드</option>
+                </select>
+                <button>Search!</button>
+            </form>
+        </main>
+    </body>
+</html>
