@@ -18,16 +18,18 @@
             <table class="striped">
                 <thead>
                     <tr>
-                        {% for e in head_list: %}
-                        <th>{{e}}</th>
+                        {% for head in head_list: %}
+                        <th>{{head}}</th>
                         {% endfor %}
                     </tr>
                 </thead>
                 <tbody>
+                    {% for value in value_list: %}
                     <tr>
-                        <td>1</td>
-                        <td>2</td>
+                        <td>{{value[0]}}</td>
+                        <td><a href="{{value[1]}}">Go To Site!</a></td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </main>

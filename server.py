@@ -17,10 +17,10 @@ def find():
 
     if find_type == "namu":
         site_info = search_namu()
-        site_info.insert(0, []) # head_list
+        site_info.insert(0, ["Title", "Url"]) # head_list
     else:
         site_info = search_dc(keyword)
 
-    return render_template("find.html", service_type=find_type, keyword=keyword, head_list=site_info[0])
+    return render_template("find.html", service_type=find_type, keyword=keyword, head_list=site_info[0], value_list=site_info[1:])
 
 app.run("localhost", "8080")

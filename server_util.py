@@ -11,9 +11,11 @@ def search_namu() -> list:
     result = []
 
     p = sync_playwright().start()
-    chrome = p.chromium.launch(headless=True)
-    page = chrome.new_page()
-    page.goto(source_url)
+    chrome = p.chromium.launch(headless=False)
+    ctx = chrome.new_context(user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
+    page = ctx.new_page()
+    page.goto(source_url+"/w/", timeout=2000)
+    page.get_by_text("나무위키 홈").click()
     page.locator("div._2zpLpeXL.AM9Kqr9N").hover()
     time.sleep(1)
     soup = BeautifulSoup(page.content(), "html.parser")
@@ -21,8 +23,9 @@ def search_namu() -> list:
     for e in popular_list[:-1]:
         url = e.find("a")["href"]
         title = e.find("span").text
-        result.append(f"{title} - {source_url}{url}")
+        result.append([title, f"{source_url}{url}"])
     p.stop()
+    # print(result)
     return result
 
 """
@@ -31,3 +34,4 @@ return [[headers], [values]]
 def search_dc(keyword: str) -> list:
     source_url = "https://www.dcinside.com"
     return [[], []]
+# print(search_namu())
