@@ -22,6 +22,7 @@ test-output.*
 /tests/keys/localhost.key
 *.csv
 __pycache__/*
+*.json
 
 # Windows
 Thumbs.db
