@@ -11,8 +11,16 @@ browser = p.chromium.launch()
 context = browser.new_context()
 page = context.new_page()
 
+gall_name = input("input gallery name :")
+file_name = input("input file name(extension is csv) :") + ".csv"
+
+if gall_name == "":
+    gall_name = "건담"
+if file_name == ".csv":
+    file_name = "result.csv"
+
 page.goto("https://www.dcinside.com/")
-page.get_by_placeholder("갤러리 & 통합검색").fill("건담")
+page.get_by_placeholder("갤러리 & 통합검색").fill(gall_name)
 page.keyboard.down("Enter")
 
 # New Page Handler <a href='https://playwright.dev/python/docs/pages#handling-new-pages'></a>
@@ -29,9 +37,9 @@ articles = soup.find_all("tr", {
     "class": "ub-content us-post"
     })
 
-csv_file = open("gundam_gall.csv", "w", encoding="UTF-8")
+csv_file = open(file_name, "w", encoding="UTF-8")
 writer = csv.writer(csv_file)
-if os.stat("./gundam_gall.csv").st_size == 0:
+if os.stat("./" + file_name).st_size == 0:
     writer.writerow(["제목", "작성자", "날짜", "링크"])
 
 for e in articles:

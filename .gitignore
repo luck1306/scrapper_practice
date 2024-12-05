@@ -23,6 +23,7 @@ test-output.*
 *.csv
 __pycache__/*
 *.json
+*.png
 
 # Windows
 Thumbs.db

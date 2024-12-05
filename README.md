@@ -1,3 +1,7 @@
+# practice_scrapping/playwrite.py
+![](./example.png)
+
+---
 # About Scrapy
 
 1. pip3 install scrapy
