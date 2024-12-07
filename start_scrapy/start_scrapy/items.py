@@ -26,3 +26,5 @@ blabafafasf
 class YTElementItem(scrapy.Item):
     url = scrapy.Field() # video link
     name = scrapy.Field() # video's title
+    channel = scrapy.Field() # video's publisher
+    channel_link = scrapy.Field()

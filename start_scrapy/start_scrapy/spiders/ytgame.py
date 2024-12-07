@@ -18,6 +18,7 @@ class YtgameSpider(scrapy.Spider):
 
 # #scroll-container #items h3 a::text <- YTElementItem.name
 # #scroll-container #items h3 a::attr(\"href\") <_ YTElementItem.url
+# yt-formatted-string#text > a
     def parse(self, response):
         
         for e in response.css("ytd-horizontal-card-list-renderer.ytd-item-section-renderer"):
@@ -25,10 +26,12 @@ class YtgameSpider(scrapy.Spider):
             titleItem["name"] = e.css("#header-container.ytd-horizontal-card-list-renderer h2#header #title::text").get()
             titleItem["url"] = e.css("#header-container.ytd-horizontal-card-list-renderer a.ytd-rich-list-header-renderer::attr(href)").get()
             titleItem["elements"] = []
-            for es in e.css("#scroll-container #items h3"):
+            for es in e.css("#scroll-container #items div#meta"):
                 elementItem = YTElementItem()
-                elementItem["url"] = es.css("a::text").get()
-                elementItem["name"] = es.css("a::attr('href')").get()
+                elementItem["url"] = es.css("h3 > a::text").get()
+                elementItem["name"] = es.css("h3 > a::attr('href')").get()
+                elementItem["channel"] = es.css("#text > a::text").get()
+                elementItem["channel_link"] = es.css("#text > a::attr('href')").get()
                 titleItem["elements"].append(elementItem)
             if titleItem["elements"] == []: # When [Top live games]
                 for es in e.css("ytd-game-details-renderer.style-scope"):

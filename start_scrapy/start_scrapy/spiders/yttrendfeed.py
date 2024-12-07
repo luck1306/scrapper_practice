@@ -6,8 +6,10 @@ class YttrendfeedSpider(scrapy.Spider):
     allowed_domains = ["www.youtube.com"]
     start_urls = ["https://www.youtube.com/feed/trending"]
 
-    #ytd-item-section-renderer.style-scope <- 메인 페이지
+    # ytd-item-section-renderer.style-scope <- section
 
-    # #grid-container > ytd-video-renderer.style-scope <- 실시간 음악, 게임, 영화
+    #grid-container > ytd-video-renderer.style-scope <- typical video box
+    #items > .yt-horizontal-list-renderer <- video box 4 shorts
+    #text > a -> video channel info
     def parse(self, response):
         pass
