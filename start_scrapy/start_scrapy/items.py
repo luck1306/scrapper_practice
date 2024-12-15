@@ -18,7 +18,7 @@ class YTTitleItem(scrapy.Item):
     elements = scrapy.Field() # YTElementItem list
 
     def __str__(self) -> str:
-        return f"name: {self.name}, url: {self.url}, eles: {self.elements}"
+        return f"name: {self.name}, url: {self.url}, elements: {self.elements}"
 
 """
 blabafafasf
@@ -28,3 +28,6 @@ class YTElementItem(scrapy.Item):
     name = scrapy.Field() # video's title
     channel = scrapy.Field() # video's publisher
     channel_link = scrapy.Field()
+
+    def __str__(self):
+        return f"url: {self.url}, name: {self.name}, channel: {self.channel}, channel_link: {self.channel_link}"
